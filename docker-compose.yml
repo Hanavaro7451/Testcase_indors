@@ -1,0 +1,21 @@
+services:
+   db:
+      image: mariadb:latest
+      container_name: data_base
+      restart: always
+      environment:
+         MYSQL_ROOT_PASSWORD: rootpassword
+         MYSQL_DATABASE: cats_db
+         MYSQL_USER: cats_user
+         MYSQL_PASSWORD: 1234
+      ports:
+         - "3306:3306"
+   
+   backend:
+      build: ./MyCats/
+      container_name: backend
+      restart: always
+      depends_on:
+         - db
+      env_file:
+         - .env
