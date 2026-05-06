@@ -15,7 +15,14 @@ services:
       build: ./MyCats/
       container_name: backend
       restart: always
+      ports:
+         - "8080:8000"
       depends_on:
          - db
       env_file:
          - .env
+      volumes:
+         - static_volume:/app/static
+
+volumes:
+   static_volume:

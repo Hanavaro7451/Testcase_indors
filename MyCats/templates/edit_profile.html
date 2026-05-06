@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактировать профиль - MyCats{% endblock %}
+
+{% block content %}
+<h2>Редактировать профиль</h2>
+
+{% if form.non_field_errors %}
+    <div class="alert alert-error">
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="post" style="max-width: 500px;">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ form.email.value|default:'' }}">
+    </div>
+    
+    <div class="form-group">
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" name="age" value="{{ form.age.value|default:'' }}" min="0">
+    </div>
+    
+    <div class="form-group">
+        <label for="first_name">Имя:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ form.first_name.value|default:'' }}">
+    </div>
+    
+    <div class="form-group">
+        <label for="last_name">Фамилия:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ form.last_name.value|default:'' }}">
+    </div>
+    
+    <div style="display: flex; gap: 10px;">
+        <button type="submit" class="btn-primary">Сохранить</button>
+        <a href="{% url 'profile' %}" class="btn">Отмена</a>
+    </div>
+</form>
+{% endblock %}

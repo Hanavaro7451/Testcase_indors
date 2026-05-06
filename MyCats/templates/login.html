@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход - MyCats{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 50px auto;">
+    <h2 style="text-align: center;">Вход</h2>
+    
+    {% if form.non_field_errors %}
+        <div class="alert alert-error">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">Войти</button>
+    </form>
+    
+    <p style="text-align: center; margin-top: 20px;">
+        Нет учетной записи? <a href="{% url 'register' %}" style="color: #667eea; text-decoration: none;">Зарегистрируйтесь</a>
+    </p>
+</div>
+{% endblock %}

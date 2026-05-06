@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить кошку - MyCats{% endblock %}
+
+{% block content %}
+<h2>{% if cat %}Редактировать кошку{% else %}Добавить новую кошку{% endif %}</h2>
+
+{% if form.non_field_errors %}
+    <div class="alert alert-error">
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="post" style="max-width: 500px;">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="name">Имя кошки:</label>
+        <input type="text" id="name" name="name" value="{{ form.name.value|default:'' }}" required>
+        {% if form.name.errors %}
+            <small style="color: red;">{{ form.name.errors }}</small>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="breed">Порода:</label>
+        <input type="text" id="breed" name="breed" value="{{ form.breed.value|default:'' }}" required>
+        {% if form.breed.errors %}
+            <small style="color: red;">{{ form.breed.errors }}</small>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="age">Возраст (лет):</label>
+        <input type="number" id="age" name="age" value="{{ form.age.value|default:'' }}" min="0" required>
+        {% if form.age.errors %}
+            <small style="color: red;">{{ form.age.errors }}</small>
+        {% endif %}
+    </div>
+    
+    <div style="display: flex; gap: 10px;">
+        <button type="submit" class="btn-primary">{% if cat %}Сохранить{% else %}Добавить кошку{% endif %}</button>
+        <a href="{% url 'my-cats' %}" class="btn">Отмена</a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои кошки - MyCats{% endblock %}
+
+{% block content %}
+<h2>Мои кошки</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<button class="btn-primary" onclick="window.location.href='{% url 'add-cat' %}'" style="margin-bottom: 20px;">+ Добавить кошку</button>
+
+{% if cats %}
+    <div class="grid">
+        {% for cat in cats %}
+            <div class="cat-card" style="flex-direction: column; align-items: flex-start;">
+                <div class="cat-info">
+                    <h3>🐱 {{ cat.name }}</h3>
+                    <p><strong>Порода:</strong> {{ cat.breed }}</p>
+                    <p><strong>Возраст:</strong> {{ cat.age }} {% if cat.age == 1 %}год{% elif cat.age > 4 %}лет{% else %}года{% endif %}</p>
+                </div>
+                <div style="margin-top: 15px; display: flex; gap: 10px;">
+                    <a href="{% url 'edit-cat' cat.id %}" class="btn">✏️ Редактировать</a>
+                    <a href="{% url 'delete-cat' cat.id %}" class="btn" style="background: #dc3545;" onclick="return confirm('Вы уверены?');">🗑️ Удалить</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-success" style="text-align: center; padding: 40px;">
+        <p>У вас пока нет кошек 😿</p>
+        <button class="btn-primary" onclick="window.location.href='{% url 'add-cat' %}'" style="margin-top: 15px;">Добавьте первую кошку</button>
+    </div>
+{% endif %}
+{% endblock %}

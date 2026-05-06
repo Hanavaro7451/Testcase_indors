@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация - MyCats{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 50px auto;">
+    <h2 style="text-align: center;">Регистрация</h2>
+    
+    {% if form.non_field_errors %}
+        <div class="alert alert-error">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" required>
+            {% if form.username.errors %}
+                <small style="color: red;">{{ form.username.errors }}</small>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" name="age">
+        </div>
+        
+        <div class="form-group">
+            <label for="password1">Пароль:</label>
+            <input type="password" id="password1" name="password1" required>
+            {% if form.password1.errors %}
+                <small style="color: red;">{{ form.password1.errors }}</small>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="password2">Подтверждение пароля:</label>
+            <input type="password" id="password2" name="password2" required>
+            {% if form.password2.errors %}
+                <small style="color: red;">{{ form.password2.errors }}</small>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">Зарегистрироваться</button>
+    </form>
+    
+    <p style="text-align: center; margin-top: 20px;">
+        Уже есть учетная запись? <a href="{% url 'login' %}" style="color: #667eea; text-decoration: none;">Войдите</a>
+    </p>
+</div>
+{% endblock %}
