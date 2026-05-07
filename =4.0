@@ -1,0 +1,17 @@
+Collecting channels_redis
+  Downloading channels_redis-4.3.0-py3-none-any.whl.metadata (13 kB)
+Collecting redis>=4.6 (from channels_redis)
+  Downloading redis-7.4.0-py3-none-any.whl.metadata (12 kB)
+Collecting msgpack~=1.0 (from channels_redis)
+  Downloading msgpack-1.1.2-cp312-cp312-win_amd64.whl.metadata (8.4 kB)
+Requirement already satisfied: asgiref<4,>=3.9.1 in .\venv\Lib\site-packages (from channels_redis) (3.11.1)
+Requirement already satisfied: channels>=4.2.2 in .\venv\Lib\site-packages (from channels_redis) (4.3.2)
+Requirement already satisfied: Django>=4.2 in .\venv\Lib\site-packages (from channels>=4.2.2->channels_redis) (6.0.5)
+Requirement already satisfied: sqlparse>=0.5.0 in .\venv\Lib\site-packages (from Django>=4.2->channels>=4.2.2->channels_redis) (0.5.5)
+Requirement already satisfied: tzdata in .\venv\Lib\site-packages (from Django>=4.2->channels>=4.2.2->channels_redis) (2026.2)
+Downloading channels_redis-4.3.0-py3-none-any.whl (20 kB)
+Downloading msgpack-1.1.2-cp312-cp312-win_amd64.whl (72 kB)
+Downloading redis-7.4.0-py3-none-any.whl (409 kB)
+Installing collected packages: redis, msgpack, channels_redis
+
+Successfully installed channels_redis-4.3.0 msgpack-1.1.2 redis-7.4.0
