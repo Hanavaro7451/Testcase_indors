@@ -1,17 +1,16 @@
-
 from django.db.models import Q
 from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView, Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from MyCats.api.permissions import IsOwner
 from api.serializers import CatSerializer, MessageSerializer, OwnerSerializer
 from cats.models import Cat
-from user.models import Message
 
 
 class CatViewSet(viewsets.ModelViewSet):
     serializer_class = CatSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         return Cat.objects.filter(owner=self.request.user)
