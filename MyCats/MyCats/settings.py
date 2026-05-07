@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'channels',
     'api',
     'cats',
     'user',
@@ -49,23 +48,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'MyCats.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-ASGI_APPLICATION = 'MyCats.asgi.application'
-
 WSGI_APPLICATION = 'MyCats.wsgi.application'
 
 DATABASES = {
@@ -77,12 +59,6 @@ DATABASES = {
         'HOST': os.getenv('MYSQL_HOST'),
         'PORT': os.getenv('MYSQL_PORT'),
     }
-}
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -112,6 +88,3 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'user.Owner'
-
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
